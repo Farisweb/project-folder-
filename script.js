@@ -18,7 +18,7 @@ function generatePoster() {
         uploadedImg.src = event.target.result;
 
         uploadedImg.onload = function() {
-          // 💡 Position image exactly inside the white square (left: 68px, top: 90px, size: 180x180)
+          // 💡 Position image exactly inside the white square (left: 68px, top: 90px, size: 200x250)
           ctx.save();
           ctx.beginPath();
           ctx.roundRect(68, 90, 180, 180, 30); // same corner radius as in image
