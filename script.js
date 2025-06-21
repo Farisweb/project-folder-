@@ -18,23 +18,28 @@ function generatePoster() {
         uploadedImg.src = event.target.result;
 
         uploadedImg.onload = function() {
-          // Draw uploaded photo in the reserved area (customize dimensions)
-          ctx.drawImage(uploadedImg, 100, 200, 300, 300);
+          // Draw square photo in top-left placeholder (approx. 140x140 px starting at 40, 40)
+          ctx.save();
+          ctx.beginPath();
+          ctx.roundRect(40, 40, 200, 200, 20); // rounded square
+          ctx.clip();
+          ctx.drawImage(uploadedImg, 40, 40, 200, 200);
+          ctx.restore();
 
-          // Draw name text (customize position/font)
-          ctx.font = 'bold 40px Arial';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText(userName, 100, 600);
+          // Draw name below image (adjust if needed)
+          ctx.font = 'bold 30px Arial';
+          ctx.fillStyle = '#000000';
+          ctx.textAlign = 'left';
+          ctx.fillText(userName, 40, 270);
 
           showDownloadAndShare();
         };
       };
       reader.readAsDataURL(imageUpload);
     } else {
-      // Only name entered
-      ctx.font = 'bold 40px Arial';
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(userName, 100, 600);
+      ctx.font = 'bold 30px Arial';
+      ctx.fillStyle = '#000000';
+      ctx.fillText(userName, 40, 270);
       showDownloadAndShare();
     }
   };
@@ -49,7 +54,7 @@ function showDownloadAndShare() {
   downloadLink.href = imageData;
   downloadLink.style.display = 'inline-block';
 
-  const whatsappURL = `https://wa.me/?text=Check%20out%20my%20poster!%20Download%20here:%20${encodeURIComponent(imageData)}`;
+  const whatsappURL = `https://wa.me/?text=Check%20out%20my%20ALNOOR%20Poster!%20Download:%20${encodeURIComponent(imageData)}`;
   shareLink.href = whatsappURL;
   shareLink.textContent = 'Share on WhatsApp';
   shareLink.style.display = 'inline-block';
