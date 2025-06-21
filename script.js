@@ -18,28 +18,29 @@ function generatePoster() {
         uploadedImg.src = event.target.result;
 
         uploadedImg.onload = function() {
-          // Draw square photo in top-left placeholder (approx. 140x140 px starting at 40, 40)
+          // 💡 Position image exactly inside the white square (left: 68px, top: 90px, size: 180x180)
           ctx.save();
           ctx.beginPath();
-          ctx.roundRect(40, 40, 200, 200, 20); // rounded square
+          ctx.roundRect(68, 90, 180, 180, 30); // same corner radius as in image
           ctx.clip();
-          ctx.drawImage(uploadedImg, 40, 40, 200, 200);
+          ctx.drawImage(uploadedImg, 68, 90, 180, 180);
           ctx.restore();
 
-          // Draw name below image (adjust if needed)
-          ctx.font = 'bold 30px Arial';
-          ctx.fillStyle = '#000000';
-          ctx.textAlign = 'left';
-          ctx.fillText(userName, 40, 270);
+          // 📝 Position the name text below the image (centered under image)
+          ctx.font = 'bold 28px sans-serif';
+          ctx.fillStyle = '#000';
+          ctx.textAlign = 'center';
+          ctx.fillText(userName, 68 + 90, 290); // center X = 68 + half width
 
           showDownloadAndShare();
         };
       };
       reader.readAsDataURL(imageUpload);
     } else {
-      ctx.font = 'bold 30px Arial';
-      ctx.fillStyle = '#000000';
-      ctx.fillText(userName, 40, 270);
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.fillText(userName, 68 + 90, 290);
       showDownloadAndShare();
     }
   };
